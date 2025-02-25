@@ -1,61 +1,23 @@
-import 'package:args/args.dart';
+import 'dart:io';
 
-const String version = '0.0.1';
-
-ArgParser buildParser() {
-  return ArgParser()
-    ..addFlag(
-      'help',
-      abbr: 'h',
-      negatable: false,
-      help: 'Print this usage information.',
-    )
-    ..addFlag(
-      'verbose',
-      abbr: 'v',
-      negatable: false,
-      help: 'Show additional command output.',
-    )
-    ..addFlag(
-      'version',
-      negatable: false,
-      help: 'Print the tool version.',
-    );
-}
-
-void printUsage(ArgParser argParser) {
-  print('Usage: dart lear_algorithem_and_logic.dart <flags> [arguments]');
-  print(argParser.usage);
-}
+import 'collection.dart';
+import 'control_flow.dart';
 
 void main(List<String> arguments) {
-  final ArgParser argParser = buildParser();
-  try {
-    final ArgResults results = argParser.parse(arguments);
-    bool verbose = false;
+  while (true) {
+    stdout.write("Enter a command: ");
+    String? input = stdin.readLineSync();
 
-    // Process the parsed arguments.
-    if (results.wasParsed('help')) {
-      printUsage(argParser);
-      return;
-    }
-    if (results.wasParsed('version')) {
-      print('lear_algorithem_and_logic version: $version');
-      return;
-    }
-    if (results.wasParsed('verbose')) {
-      verbose = true;
+    if (input == "list") {
+      Collection.list();
     }
 
-    // Act on the arguments provided.
-    print('Positional arguments: ${results.rest}');
-    if (verbose) {
-      print('[VERBOSE] All arguments: ${results.arguments}');
+    if (input == "loop") {
+      ControlFlow.looping("1");
     }
-  } on FormatException catch (e) {
-    // Print usage information if an invalid argument was provided.
-    print(e.message);
-    print('');
-    printUsage(argParser);
+
+    if (input == null) {
+      break;
+    }
   }
 }
