@@ -1,5 +1,6 @@
-import 'dsa_example.dart';
+import 'algorithem.dart';
 
 void main() {
-  DSAExample.iTree();
+  Algorithem.simpleAlgo();
+
 }
